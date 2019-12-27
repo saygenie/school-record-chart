@@ -111,9 +111,8 @@ const flatReducer4 = (accumulator, current, index, array) => {
   if (accIdx !== -1) {
     accumulator[accIdx].averageGPA +=
       Number(current.gpa) * Number(current.credits);
-    if (majorFlag)
-      accumulator[accIdx].generalCredits += Number(current.credits);
-    else accumulator[accIdx].majorCredits += Number(current.credits);
+    if (majorFlag) accumulator[accIdx].majorCredits += Number(current.credits);
+    else accumulator[accIdx].generalCredits += Number(current.credits);
   } else {
     const newDatum = {
       yearterm: String(current.yearterm),
