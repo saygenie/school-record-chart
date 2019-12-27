@@ -56,13 +56,10 @@ const flatReducer = (accumulator, current, index, array) => {
   return accumulator;
 };
 export const processing = data => {
-  console.log("processing");
-  console.log(data);
+
   let res = data.reduce(flatReducer, []);
-  console.log(JSON.stringify(res));
   res.map(datum => {
     datum.averageGPA = (datum.averageGPA / datum.credits).toFixed(2);
   });
-  console.log(JSON.stringify(res));
-  return JSON.stringify(res);
+  return res;
 };

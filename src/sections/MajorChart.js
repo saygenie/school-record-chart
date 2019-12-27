@@ -21,10 +21,10 @@ function MajorChart({ data }) {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
-        <YAxis />
+        <YAxis type="number" domain={[0, "4.5"]} />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="yearterm" stroke="#8884d8" />
+        <Line type="monotone" dataKey="averageGPA" stroke="#8884d8" />
       </LineChart>
     </section>
   );

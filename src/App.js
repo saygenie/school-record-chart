@@ -44,7 +44,7 @@ const pasteHandler = () => {
 };
 
 function App() {
-  const [data, setData] = useState(dummy);
+  const [data, setData] = useState([]);
 
   return (
     <div className="App">
@@ -54,10 +54,12 @@ function App() {
           className="button is-primary is-fullwidth is-rounded"
           onClick={e => {
             const parsedData = parsing(e);
+            console.log(parsedData,'parsedData')
 
             const processedData = processing(parsedData);
-
+            console.log(processedData,'processedData')
             setData(processedData);
+            
           }}
         >
           차트 만들기
