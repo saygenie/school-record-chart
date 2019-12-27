@@ -124,6 +124,40 @@ const flatReducer4 = (accumulator, current, index, array) => {
   }
   return accumulator;
 };
+const allReducer = (accumulator, current, index, array) => {
+  const accIdx = accumulator.findIndex(
+    oneDatum => oneDatum.yearterm === current.yearterm
+  );
+  const majorFlag = current.division.indexOf("전공") !== -1;
+
+  if (accIdx !== -1) {
+    if (majorFlag) {
+      accumulator[accIdx].majorGpa +=
+        Number(current.credits) * Number(current.gpa);
+      accumulator[accIdx].majorCredits += Number(current.credits);
+    } else {
+      accumulator[accIdx].generalGpa +=
+        Number(current.credits) * Number(current.gpa);
+      accumulator[accIdx].generalCredits += Number(current.credits);
+    }
+    accumulator[accIdx].totalGPA +=
+      Number(current.gpa) * Number(current.credits);
+    accumulator[accIdx].totalCredits += Number(current.credits);
+  } else {
+    const newDatum = {
+      yearterm: String(current.yearterm),
+      totalGpa: Number(current.gpa) * Number(current.credits),
+      totalCredits: Number(current.credits),
+      generalGpa: majorFlag ? 0 : Number(current.gpa) * Number(current.credits),
+      generalCredits: majorFlag ? 0 : Number(current.credits),
+      majorGpa: majorFlag ? Number(current.gpa) * Number(current.credits) : 0,
+      majorCredits: majorFlag ? Number(current.credits) : 0
+    };
+    accumulator.push(newDatum);
+  }
+  return accumulator;
+};
+
 //학기별로 학점 평균+이수학점.
 export const processing = data => {
   let res = data.reduce(flatReducer, []);
@@ -157,6 +191,18 @@ export const processing3 = data => {
 //학기별로 교양과전공 이수학점.
 export const processing4 = data => {
   let res = data.reduce(flatReducer4, []);
+  console.log("--processed Data--");
+  console.log(JSON.stringify(res));
+  return res;
+};
+//학기별로 평균 GPA(전공, 교양, 전체), 이수학점(전공, 교양, 전체) 모아보기.
+export const processingAll = data => {
+  let res = data.reduce(allReducer, []);
+  res.map(datum => {
+    datum.totalGpa = (datum.totalGpa / datum.totalCredits).toFixed(2);
+    datum.majorGpa = (datum.majorGpa / datum.majorCredits).toFixed(2);
+    datum.generalsGpa = (datum.generalsGpa / datum.generalsCredits).toFixed(2);
+  });
   console.log("--processed Data--");
   console.log(JSON.stringify(res));
   return res;
