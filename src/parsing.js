@@ -122,7 +122,7 @@ const sumReducer = (accumulator, current, index, array) => {
 };
 
 //학기별로 평균 GPA(전공, 교양, 전체), 이수학점(전공, 교양, 전체) 모아보기.
-const processingAll = data => {
+export const processingAll = data => {
   let res = data.reduce(allReducer, []);
   console.log(JSON.stringify(res));
   res.map(datum => {
@@ -146,14 +146,14 @@ const processingAll = data => {
   avgMajorGpa
   avgGeneralGpa 
    */
-const summarizingAll = data => {
+export const summarizingAll = data => {
   let res = data.reduce(sumReducer, []);
 
   console.log("--processed Data--");
   console.log(JSON.stringify(res));
   return res;
 };
-const parsing = () => {
+export const parsing = () => {
   const w = document.getElementById("editableDiv");
   const tb = w.getElementsByTagName("tbody")[1];
   const length = tb.rows.length;
