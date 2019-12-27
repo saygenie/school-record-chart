@@ -35,7 +35,7 @@ const parsing = e => {
   const length = tb.rows.length;
   console.log(JSON.stringify(tableAnalyze(tb, length)));
 };
-const flatMapReducer = (accumulator, current, index, array) => {
+const flatReducer = (accumulator, current, index, array) => {
   const accIdx = accumulator.findIndex(
     oneDatum => oneDatum.yearterm == current.yearterm
   );
@@ -54,7 +54,7 @@ const flatMapReducer = (accumulator, current, index, array) => {
   return accumulator;
 };
 const processing = data => {
-  const bbb = aaa.reduce(flatMapReducer, []);
+  const bbb = aaa.reduce(flatReducer, []);
   bbb.map(datum => {
     datum.averageGPA = datum.averageGPA / datum.credits;
   });
