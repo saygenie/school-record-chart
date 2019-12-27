@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import CreditChart from "./sections/CreditChart";
-import MajorChart from "./sections/MajorChart";
-import TotalChart from "./sections/TotalChart";
+import GpaChart from "./sections/GpaChart";
 import styled from "styled-components";
+import { parsing } from "./parsing";
 
 const RecordInput = styled.div`
   padding: 3rem;
@@ -17,6 +17,12 @@ const RecordInput = styled.div`
   }
   button {
     margin-top: 3rem;
+  }
+`;
+
+const ChartWrapper = styled.div`
+  section {
+    width: 50%;
   }
 `;
 
@@ -42,17 +48,20 @@ function App() {
         <div id="editableDiv" contentEditable="true" onPaste={pasteHandler} />
         <button
           className="button is-primary is-fullwidth is-rounded"
-          // onClick={}
+          onClick={e => {
+            const parsedData = parsing();
+
+            setData(parsedData);
+          }}
         >
           차트 만들기
         </button>
       </RecordInput>
       {data.length !== 0 && (
-        <>
+        <ChartWrapper>
+          <GpaChart data={data} />
           <CreditChart data={data} />
-          <MajorChart data={data} />
-          <TotalChart data={data} />
-        </>
+        </ChartWrapper>
       )}
     </div>
   );
