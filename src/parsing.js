@@ -11,6 +11,7 @@ const analyze = (tb, length) => {
     one.gpa = parse(tb, row, 11);
     one.retakenCode = parse(tb, row, 14);
     one.deleted = parse(tb, row, 15);
+    one.yearterm = one.year + "-" + one.semester;
     data.push(one);
   }
   return data;
@@ -34,7 +35,6 @@ export const parsing = e => {
   const tb = w.getElementsByTagName("tbody")[1];
   const length = tb.rows.length;
   const res = analyze(tb, length);
-  console.log(JSON.stringify(res));
   return res;
 };
 const flatReducer = (accumulator, current, index, array) => {
@@ -59,8 +59,9 @@ export const processing = data => {
   console.log("processing");
   console.log(data);
   let res = data.reduce(flatReducer, []);
+  console.log(JSON.stringify(res));
   res.map(datum => {
-    datum.averageGPA = datum.averageGPA / datum.credits;
+    datum.averageGPA = (datum.averageGPA / datum.credits).toFixed(2);
   });
   console.log(JSON.stringify(res));
   return JSON.stringify(res);
