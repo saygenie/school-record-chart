@@ -146,7 +146,7 @@ const processingAll = data => {
   avgMajorGpa
   avgGeneralGpa 
    */
-const summarizeAll = data => {
+const summarizingAll = data => {
   let res = data.reduce(sumReducer, []);
 
   console.log("--processed Data--");
