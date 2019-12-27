@@ -16,27 +16,33 @@ const analyze = (tb, length) => {
   }
   return data;
 };
+
 const parse = (tb, row, col) => {
   try {
     const r = tb.getElementsByTagName("tr")[row - 1];
     const d = r.getElementsByTagName("td")[col - 1];
     let content = d.innerText;
+
     if (!content) content = "null";
+
     return content;
-  } catch (error) {
+  } catch (e) {
     //마지막 row의 경우, 제대로 copy가 되지 않아 error의 값이 들어갈 수 있음.
     //그래서 null으로 반환.
-    console.log("Err");
+    console.error(e);
     return "null";
   }
 };
-export const parsing = e => {
+
+export const parsing = () => {
   const w = document.getElementById("editableDiv");
   const tb = w.getElementsByTagName("tbody")[1];
   const length = tb.rows.length;
   const res = analyze(tb, length);
+
   return res;
 };
+
 const flatReducer = (accumulator, current, index, array) => {
   const accIdx = accumulator.findIndex(
     oneDatum => oneDatum.yearterm === current.yearterm
@@ -55,14 +61,13 @@ const flatReducer = (accumulator, current, index, array) => {
   }
   return accumulator;
 };
+
 export const processing = data => {
-  console.log("processing");
-  console.log(data);
   let res = data.reduce(flatReducer, []);
-  console.log(JSON.stringify(res));
+
   res.map(datum => {
     datum.averageGPA = (datum.averageGPA / datum.credits).toFixed(2);
   });
-  console.log(JSON.stringify(res));
-  return JSON.stringify(res);
+
+  return res;
 };
