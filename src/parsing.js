@@ -156,9 +156,6 @@ export const processing3 = data => {
 //학기별로 교양과전공 이수학점.
 export const processing4 = data => {
   let res = data.reduce(flatReducer4, []);
-  res.map(datum => {
-    datum.averageGPA = (datum.averageGPA / datum.credits).toFixed(2);
-  });
   console.log("--processed Data--");
   console.log(JSON.stringify(res));
   return res;
