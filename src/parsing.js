@@ -43,7 +43,7 @@ export const parsing = () => {
   console.log(JSON.stringify(res));
   return res;
 };
-
+//학기별로 이수학점, 평균 점수.
 const flatReducer = (accumulator, current, index, array) => {
   const accIdx = accumulator.findIndex(
     oneDatum => oneDatum.yearterm === current.yearterm
@@ -62,6 +62,7 @@ const flatReducer = (accumulator, current, index, array) => {
   }
   return accumulator;
 };
+//학기별로 전공이수학점, 평균 점수.
 const flatReducer2 = (accumulator, current, index, array) => {
   if (current.division.indexOf("전공") === -1) return accumulator;
   const accIdx = accumulator.findIndex(
@@ -81,7 +82,7 @@ const flatReducer2 = (accumulator, current, index, array) => {
   }
   return accumulator;
 };
-//교양만 보여주기
+//학기별로 교양이수학점, 평균학점 보여주기
 const flatReducer3 = (accumulator, current, index, array) => {
   if (current.division.indexOf("전공") !== -1) return accumulator;
   const accIdx = accumulator.findIndex(
@@ -101,6 +102,7 @@ const flatReducer3 = (accumulator, current, index, array) => {
   }
   return accumulator;
 };
+//학기별로 전공이수학점, 교양이수학점.
 const flatReducer4 = (accumulator, current, index, array) => {
   const accIdx = accumulator.findIndex(
     oneDatum => oneDatum.yearterm === current.yearterm
