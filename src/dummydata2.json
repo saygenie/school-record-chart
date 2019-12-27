@@ -1,0 +1,15 @@
+[
+  { "yearterm": "2015-1", "averageGPA": "3.16" },
+  {
+    "yearterm": "2015-2",
+    "averageGPA": "3.74"
+  },
+  {
+    "yearterm": "2016-1",
+    "averageGPA": "3.81"
+  },
+  {
+    "yearterm": "2016-2",
+    "averageGPA": "4.12"
+  }
+]
