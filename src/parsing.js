@@ -161,6 +161,7 @@ export const processing = data => {
 };
 //학기별로 전공 평균+이수학점.
 export const processing2 = data => {
+  console.log(data,'data')
   let res = data.reduce(flatReducer2, []);
   res.map(datum => {
     datum.averageGPA = (datum.averageGPA / datum.credits).toFixed(2);
