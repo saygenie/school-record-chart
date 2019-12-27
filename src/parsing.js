@@ -8,6 +8,7 @@ const analyze = (tb, length) => {
     one.name = parse(tb, row, 4);
     one.division = parse(tb, row, 5);
     one.credits = parse(tb, row, 8);
+    one.grade = parse(tb, row, 10);
     one.gpa = parse(tb, row, 11);
     one.retakenCode = parse(tb, row, 14);
     one.deleted = parse(tb, row, 15);
@@ -39,6 +40,7 @@ const allReducer = (accumulator, current, index, array) => {
     oneDatum => oneDatum.yearterm === current.yearterm
   );
   const majorFlag = current.division.indexOf("전공") !== -1;
+  if (current.deleted !== "null") return accumulator;
 
   if (accIdx !== -1) {
     if (majorFlag) {
@@ -53,6 +55,10 @@ const allReducer = (accumulator, current, index, array) => {
     accumulator[accIdx].totalGpa +=
       Number(current.gpa) * Number(current.credits);
     accumulator[accIdx].totalCredits += Number(current.credits);
+    if (current.grade === "P" || current.grade === "F") {
+      //PF일 경우
+      accumulator[accIdx].pfLectures += 1;
+    }
   } else {
     const newDatum = {
       yearterm: String(current.yearterm),
@@ -61,7 +67,8 @@ const allReducer = (accumulator, current, index, array) => {
       generalGpa: majorFlag ? 0 : Number(current.gpa) * Number(current.credits),
       generalCredits: majorFlag ? 0 : Number(current.credits),
       majorGpa: majorFlag ? Number(current.gpa) * Number(current.credits) : 0,
-      majorCredits: majorFlag ? Number(current.credits) : 0
+      majorCredits: majorFlag ? Number(current.credits) : 0,
+      pfLectures: current.grade === "P" || current.grade === "F" ? 1 : 0
     };
     accumulator.push(newDatum);
   }
@@ -69,6 +76,7 @@ const allReducer = (accumulator, current, index, array) => {
 };
 const sumReducer = (accumulator, current, index, array) => {
   const majorFlag = current.division.indexOf("전공") !== -1;
+  if (current.deleted !== "null") return accumulator;
   if (accumulator.length === 0) {
     const newDatum = {
       totalGpa: Number(current.gpa) * Number(current.credits),
@@ -76,26 +84,37 @@ const sumReducer = (accumulator, current, index, array) => {
       generalGpa: majorFlag ? 0 : Number(current.gpa) * Number(current.credits),
       generalCredits: majorFlag ? 0 : Number(current.credits),
       majorGpa: majorFlag ? Number(current.gpa) * Number(current.credits) : 0,
-      majorCredits: majorFlag ? Number(current.credits) : 0
+      majorCredits: majorFlag ? Number(current.credits) : 0,
+      pfLectures: current.grade === "P" || current.grade === "F" ? 1 : 0
     };
     accumulator.push(newDatum);
   } else {
-    accumulator.totalGpa += Number(current.gpa) * Number(current.credits);
-    accumulator.totalCredits += Number(current.credits);
+    if (current.grade === "P" || current.grade === "F")
+      //PF일 경우
+      accumulator[0].pfLectures += 1;
+    accumulator[0].totalGpa += Number(current.gpa) * Number(current.credits);
+    accumulator[0].totalCredits += Number(current.credits);
     if (majorFlag) {
-      accumulator.majorGpa += Number(current.gpa) * Number(current.credits);
-      accumulator.majorCredits += Number(current.credits);
+      accumulator[0].majorGpa += Number(current.gpa) * Number(current.credits);
+      accumulator[0].majorCredits += Number(current.credits);
     } else {
-      accumulator.generalGpa += Number(current.gpa) * Number(current.credits);
-      accumulator.generalCredits += Number(current.credits);
+      accumulator[0].generalGpa +=
+        Number(current.gpa) * Number(current.credits);
+      accumulator[0].generalCredits += Number(current.credits);
     }
   }
-  if (index === accumulator.length) {
-    console.log("HERE");
+  if (index === array.length - 1) {
     const res = {
-      avgTotalGpa: accumulator.totalGpa / accumulator.totalCredits,
-      avgMajorGpa: accumulator.totalGpa / accumulator.totalCredits,
-      avgGeneralGpa: accumulator.totalGpa / accumulator.totalCredits
+      avgTotalGpa: (
+        accumulator[0].totalGpa /
+        (accumulator[0].totalCredits - accumulator[0].pfLectures)
+      ).toFixed(2),
+      avgMajorGpa: (
+        accumulator[0].majorGpa / accumulator[0].majorCredits
+      ).toFixed(2),
+      avgGeneralGpa: (
+        accumulator[0].generalGpa / accumulator[0].generalCredits
+      ).toFixed(2)
     };
     return res;
   }
@@ -103,31 +122,38 @@ const sumReducer = (accumulator, current, index, array) => {
 };
 
 //학기별로 평균 GPA(전공, 교양, 전체), 이수학점(전공, 교양, 전체) 모아보기.
-export const processingAll = data => {
+const processingAll = data => {
   let res = data.reduce(allReducer, []);
   console.log(JSON.stringify(res));
   res.map(datum => {
-    datum.totalGpa = (datum.totalGpa / datum.totalCredits).toFixed(2);
-    datum.majorGpa = (datum.majorGpa / datum.majorCredits).toFixed(2);
-    datum.generalGpa = (datum.generalGpa / datum.generalCredits).toFixed(2);
+    datum.totalGpa = !datum.totalGpa
+      ? 0
+      : (datum.totalGpa / (datum.totalCredits - datum.pfLectures)).toFixed(2);
+    datum.majorGpa = !datum.majorGpa
+      ? 0
+      : (datum.majorGpa / datum.majorCredits).toFixed(2);
+    datum.generalGpa = !datum.generalGpa
+      ? 0
+      : (datum.generalGpa / datum.generalCredits).toFixed(2);
+    delete datum.pfLectures;
   });
   console.log("--processed Data--");
   console.log(JSON.stringify(res));
   return res;
 };
 /**
-avgTotalGpa
-avgMajorGpa
-avgGeneralGpa 
- */
-export const summarizeAll = data => {
-  let res = data.reduce(sumReducer, {});
+  avgTotalGpa
+  avgMajorGpa
+  avgGeneralGpa 
+   */
+const summarizeAll = data => {
+  let res = data.reduce(sumReducer, []);
 
   console.log("--processed Data--");
   console.log(JSON.stringify(res));
   return res;
 };
-export const parsing = () => {
+const parsing = () => {
   const w = document.getElementById("editableDiv");
   const tb = w.getElementsByTagName("tbody")[1];
   const length = tb.rows.length;
