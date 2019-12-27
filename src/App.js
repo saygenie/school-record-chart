@@ -48,7 +48,7 @@ function App() {
         <div id="editableDiv" contentEditable="true" onPaste={pasteHandler} />
         <button
           className="button is-primary is-fullwidth is-rounded"
-          onClick={e => {
+          onClick={() => {
             const parsedData = parsing();
 
             setData(parsedData);

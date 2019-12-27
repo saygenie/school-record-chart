@@ -34,15 +34,6 @@ const parse = (tb, row, col) => {
   }
 };
 
-export const parsing = () => {
-  const w = document.getElementById("editableDiv");
-  const tb = w.getElementsByTagName("tbody")[1];
-  const length = tb.rows.length;
-  const res = analyze(tb, length);
-  console.log("--parsed Data--");
-  console.log(JSON.stringify(res));
-  return res;
-};
 //학기별로 이수학점, 평균 점수.
 const flatReducer = (accumulator, current, index, array) => {
   const accIdx = accumulator.findIndex(
@@ -140,7 +131,7 @@ const allReducer = (accumulator, current, index, array) => {
         Number(current.credits) * Number(current.gpa);
       accumulator[accIdx].generalCredits += Number(current.credits);
     }
-    accumulator[accIdx].totalGPA +=
+    accumulator[accIdx].totalGpa +=
       Number(current.gpa) * Number(current.credits);
     accumulator[accIdx].totalCredits += Number(current.credits);
   } else {
@@ -170,6 +161,7 @@ export const processing = data => {
 };
 //학기별로 전공 평균+이수학점.
 export const processing2 = data => {
+  console.log(data,'data')
   let res = data.reduce(flatReducer2, []);
   res.map(datum => {
     datum.averageGPA = (datum.averageGPA / datum.credits).toFixed(2);
@@ -196,14 +188,38 @@ export const processing4 = data => {
   return res;
 };
 //학기별로 평균 GPA(전공, 교양, 전체), 이수학점(전공, 교양, 전체) 모아보기.
-export const processingAll = data => {
+export const processingGpa = data => {
   let res = data.reduce(allReducer, []);
+  console.log(JSON.stringify(res));
   res.map(datum => {
     datum.totalGpa = (datum.totalGpa / datum.totalCredits).toFixed(2);
     datum.majorGpa = (datum.majorGpa / datum.majorCredits).toFixed(2);
-    datum.generalsGpa = (datum.generalsGpa / datum.generalsCredits).toFixed(2);
+    datum.generalGpa = (datum.generalGpa / datum.generalCredits).toFixed(2);
   });
   console.log("--processed Data--");
+  console.log(JSON.stringify(res));
+  return res;
+};
+//학기별로 평균 GPA(전공, 교양, 전체), 이수학점(전공, 교양, 전체) 모아보기.
+export const processingCredits = data => {
+  let res = data.reduce(allReducer, []);
+  console.log(JSON.stringify(res));
+  res.map(datum => {
+    datum.totalGpa = (datum.totalGpa / datum.totalCredits).toFixed(2);
+    datum.majorGpa = (datum.majorGpa / datum.majorCredits).toFixed(2);
+    datum.generalGpa = (datum.generalGpa / datum.generalCredits).toFixed(2);
+  });
+  console.log("--processed Data--");
+  console.log(JSON.stringify(res));
+  return res;
+};
+
+export const parsing = () => {
+  const w = document.getElementById("editableDiv");
+  const tb = w.getElementsByTagName("tbody")[1];
+  const length = tb.rows.length;
+  const res = analyze(tb, length);
+  console.log("--parsed Data--");
   console.log(JSON.stringify(res));
   return res;
 };
