@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import CreditChart from "./sections/CreditChart";
-import MajorChart from "./sections/MajorChart";
-import TotalChart from "./sections/TotalChart";
+import GpaChart from "./sections/GpaChart";
 import styled from "styled-components";
-import { default as dummy } from "./dummy.json";
-import { parsing, processing } from "./parsing";
+import { parsing } from "./parsing";
 
 const RecordInput = styled.div`
   padding: 3rem;
@@ -23,8 +21,6 @@ const RecordInput = styled.div`
 `;
 
 const ChartWrapper = styled.div`
-  display: flex;
-  flex-flow: wrap;
   section {
     width: 50%;
   }
@@ -54,9 +50,8 @@ function App() {
           className="button is-primary is-fullwidth is-rounded"
           onClick={e => {
             const parsedData = parsing();
-            const processedData = processing(parsedData);
 
-            setData(processedData);
+            setData(parsedData);
           }}
         >
           차트 만들기
@@ -64,9 +59,8 @@ function App() {
       </RecordInput>
       {data.length !== 0 && (
         <ChartWrapper>
+          <GpaChart data={data} />
           <CreditChart data={data} />
-          <MajorChart data={data} />
-          <TotalChart data={data} />
         </ChartWrapper>
       )}
     </div>
