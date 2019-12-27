@@ -4,6 +4,7 @@ import MajorChart from "./sections/MajorChart";
 import TotalChart from "./sections/TotalChart";
 import styled from "styled-components";
 import { default as dummy } from "./dummy.json";
+import { parsing, processing } from "./parsing";
 
 const RecordInput = styled.div`
   padding: 3rem;
@@ -51,7 +52,13 @@ function App() {
         <div id="editableDiv" contentEditable="true" onPaste={pasteHandler} />
         <button
           className="button is-primary is-fullwidth is-rounded"
-          onClick={() => {}}
+          onClick={e => {
+            const parsedData = parsing(e);
+
+            const processedData = processing(parsedData);
+
+            setData(processedData);
+          }}
         >
           차트 만들기
         </button>
