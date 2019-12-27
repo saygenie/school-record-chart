@@ -39,7 +39,8 @@ export const parsing = () => {
   const tb = w.getElementsByTagName("tbody")[1];
   const length = tb.rows.length;
   const res = analyze(tb, length);
-
+  console.log("--parsed Data--");
+  console.log(JSON.stringify(res));
   return res;
 };
 
@@ -61,13 +62,104 @@ const flatReducer = (accumulator, current, index, array) => {
   }
   return accumulator;
 };
-
+const flatReducer2 = (accumulator, current, index, array) => {
+  if (current.division.indexOf("전공") === -1) return accumulator;
+  const accIdx = accumulator.findIndex(
+    oneDatum => oneDatum.yearterm === current.yearterm
+  );
+  if (accIdx !== -1) {
+    accumulator[accIdx].averageGPA +=
+      Number(current.gpa) * Number(current.credits);
+    accumulator[accIdx].credits += Number(current.credits);
+  } else {
+    const newDatum = {
+      yearterm: String(current.yearterm),
+      averageGPA: Number(current.gpa) * Number(current.credits),
+      credits: Number(current.credits)
+    };
+    accumulator.push(newDatum);
+  }
+  return accumulator;
+};
+//교양만 보여주기
+const flatReducer3 = (accumulator, current, index, array) => {
+  if (current.division.indexOf("전공") !== -1) return accumulator;
+  const accIdx = accumulator.findIndex(
+    oneDatum => oneDatum.yearterm === current.yearterm
+  );
+  if (accIdx !== -1) {
+    accumulator[accIdx].averageGPA +=
+      Number(current.gpa) * Number(current.credits);
+    accumulator[accIdx].credits += Number(current.credits);
+  } else {
+    const newDatum = {
+      yearterm: String(current.yearterm),
+      averageGPA: Number(current.gpa) * Number(current.credits),
+      credits: Number(current.credits)
+    };
+    accumulator.push(newDatum);
+  }
+  return accumulator;
+};
+const flatReducer4 = (accumulator, current, index, array) => {
+  const accIdx = accumulator.findIndex(
+    oneDatum => oneDatum.yearterm === current.yearterm
+  );
+  const majorFlag = current.division.indexOf("전공") !== -1;
+  if (accIdx !== -1) {
+    accumulator[accIdx].averageGPA +=
+      Number(current.gpa) * Number(current.credits);
+    if (majorFlag)
+      accumulator[accIdx].generalCredits += Number(current.credits);
+    else accumulator[accIdx].majorCredits += Number(current.credits);
+  } else {
+    const newDatum = {
+      yearterm: String(current.yearterm),
+      averageGPA: Number(current.gpa) * Number(current.credits),
+      generalCredits: majorFlag ? 0 : Number(current.credits),
+      majorCredits: majorFlag ? Number(current.credits) : 0
+    };
+    accumulator.push(newDatum);
+  }
+  return accumulator;
+};
+//학기별로 학점 평균+이수학점.
 export const processing = data => {
   let res = data.reduce(flatReducer, []);
-
   res.map(datum => {
     datum.averageGPA = (datum.averageGPA / datum.credits).toFixed(2);
   });
-
+  console.log("--processed Data--");
+  console.log(JSON.stringify(res));
+  return res;
+};
+//학기별로 전공 평균+이수학점.
+export const processing2 = data => {
+  let res = data.reduce(flatReducer2, []);
+  res.map(datum => {
+    datum.averageGPA = (datum.averageGPA / datum.credits).toFixed(2);
+  });
+  console.log("--processed Data--");
+  console.log(JSON.stringify(res));
+  return res;
+};
+//학기별로 교양 평균+이수학점.
+export const processing3 = data => {
+  let res = data.reduce(flatReducer3, []);
+  res.map(datum => {
+    datum.averageGPA = (datum.averageGPA / datum.credits).toFixed(2);
+  });
+  console.log("--processed Data--");
+  console.log(JSON.stringify(res));
+  return res;
+};
+//학기별로 교양과전공 이수학점.
+export const processing4 = data => {
+  let res = data.reduce(flatReducer4, []);
+  res.map(datum => {
+    datum.averageGPA = (datum.averageGPA / datum.credits).toFixed(2);
+  });
+  console.log("--processed Data--");
+  console.log(JSON.stringify(res));
   return res;
 };
