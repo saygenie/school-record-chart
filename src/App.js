@@ -53,10 +53,12 @@ function App() {
         <button
           className="button is-primary is-fullwidth is-rounded"
           onClick={e => {
-            const parsedData = parsing();
-            const processedData = processing(parsedData);
+            const parsedData = parsing(e);
+            console.log(parsedData,'parsedData')
 
-            setData(processedData);
+  
+            setData(parsedData);
+            
           }}
         >
           차트 만들기
@@ -66,7 +68,6 @@ function App() {
         <ChartWrapper>
           <CreditChart data={data} />
           <MajorChart data={data} />
-          <TotalChart data={data} />
         </ChartWrapper>
       )}
     </div>
