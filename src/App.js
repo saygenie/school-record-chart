@@ -3,6 +3,7 @@ import CreditChart from "./sections/CreditChart";
 import MajorChart from "./sections/MajorChart";
 import TotalChart from "./sections/TotalChart";
 import styled from "styled-components";
+import { default as dummy } from "./dummy.json";
 
 const RecordInput = styled.div`
   padding: 3rem;
@@ -20,6 +21,14 @@ const RecordInput = styled.div`
   }
 `;
 
+const ChartWrapper = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  section {
+    width: 50%;
+  }
+`;
+
 const pasteHandler = () => {
   setTimeout(() => {
     try {
@@ -34,7 +43,7 @@ const pasteHandler = () => {
 };
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(dummy);
 
   return (
     <div className="App">
@@ -42,17 +51,17 @@ function App() {
         <div id="editableDiv" contentEditable="true" onPaste={pasteHandler} />
         <button
           className="button is-primary is-fullwidth is-rounded"
-          // onClick={}
+          onClick={() => {}}
         >
           차트 만들기
         </button>
       </RecordInput>
       {data.length !== 0 && (
-        <>
+        <ChartWrapper>
           <CreditChart data={data} />
           <MajorChart data={data} />
           <TotalChart data={data} />
-        </>
+        </ChartWrapper>
       )}
     </div>
   );
