@@ -44,7 +44,7 @@ const pasteHandler = () => {
 };
 
 function App() {
-  const [data, setData] = useState(dummy);
+  const [data, setData] = useState([]);
 
   return (
     <div className="App">
@@ -53,8 +53,7 @@ function App() {
         <button
           className="button is-primary is-fullwidth is-rounded"
           onClick={e => {
-            const parsedData = parsing(e);
-
+            const parsedData = parsing();
             const processedData = processing(parsedData);
 
             setData(processedData);
