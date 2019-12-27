@@ -56,9 +56,8 @@ function App() {
             const parsedData = parsing(e);
             console.log(parsedData,'parsedData')
 
-            const processedData = processing(parsedData);
-            console.log(processedData,'processedData')
-            setData(processedData);
+  
+            setData(parsedData);
             
           }}
         >
@@ -69,7 +68,6 @@ function App() {
         <ChartWrapper>
           <CreditChart data={data} />
           <MajorChart data={data} />
-          <TotalChart data={data} />
         </ChartWrapper>
       )}
     </div>
