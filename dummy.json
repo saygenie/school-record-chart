@@ -4,88 +4,88 @@
     "code": "COSE111",
     "semester": "1",
     "name": "수업1-1",
-    "이수구분": "교양",
-    "학점": "2",
-    "평점": "3",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "2",
+    "gpa": "3",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "1",
     "name": "수업1-2",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "3.5",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "3.5",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "1",
     "name": "수업1-3",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "3.0",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "3.0",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "1",
     "name": "수업1-4",
-    "이수구분": "교양",
-    "학점": "1",
-    "평점": "0",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "1",
+    "gpa": "0",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "1",
     "name": "수업1-5",
-    "이수구분": "교양",
-    "학점": "2",
-    "평점": "2.5",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "2",
+    "gpa": "2.5",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "1",
     "name": "수업1-6",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "3.0",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "3.0",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "1",
     "name": "수업1-7",
-    "이수구분": "교양",
-    "학점": "2",
-    "평점": "4.0",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "2",
+    "gpa": "4.0",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "1",
     "name": "수업1-8",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "4.0",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "4.0",
+    "deleted": "",
+    "retakenCode": ""
   },
 
   {
@@ -93,77 +93,77 @@
     "code": "COSE111",
     "semester": "2",
     "name": "수업2-1",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "3",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "3",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "2",
     "name": "수업2-2",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "3.5",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "3.5",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "2",
     "name": "수업2-3",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "2.5",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "2.5",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "2",
     "name": "수업2-4",
-    "이수구분": "교양",
-    "학점": "1",
-    "평점": "4",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "1",
+    "gpa": "4",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "2",
     "name": "수업2-5",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "4.5",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "4.5",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE112",
     "semester": "2",
     "name": "수업2-6",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "2.5",
-    "삭제구분": "재수강",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "2.5",
+    "deleted": "재수강",
+    "retakenCode": ""
   },
   {
     "year": "2015",
     "code": "COSE111",
     "semester": "2",
     "name": "수업2-7",
-    "이수구분": "교양",
-    "학점": "2",
-    "평점": "2.5",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "2",
+    "gpa": "2.5",
+    "deleted": "",
+    "retakenCode": ""
   },
 
   {
@@ -171,66 +171,66 @@
     "code": "COSE111",
     "semester": "1",
     "name": "수업3-1",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "2",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "2",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2016",
     "code": "COSE111",
     "semester": "1",
     "name": "수업3-2",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "2.5",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "2.5",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2016",
     "code": "COSE111",
     "semester": "1",
     "name": "수업3-3",
-    "이수구분": "전공선택",
-    "학점": "3",
-    "평점": "3.5",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "전공선택",
+    "credits": "3",
+    "gpa": "3.5",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2016",
     "code": "COSE111",
     "semester": "1",
     "name": "수업3-4",
-    "이수구분": "전공선택",
-    "학점": "3",
-    "평점": "3",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "전공선택",
+    "credits": "3",
+    "gpa": "3",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2016",
     "code": "COSE111",
     "semester": "1",
     "name": "수업3-5",
-    "이수구분": "전공선택",
-    "학점": "3",
-    "평점": "3",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "전공선택",
+    "credits": "3",
+    "gpa": "3",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2016",
     "code": "COSE111",
     "semester": "1",
     "name": "수업3-6",
-    "이수구분": "전공필수",
-    "학점": "3",
-    "평점": "4.0",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "전공필수",
+    "credits": "3",
+    "gpa": "4.0",
+    "deleted": "",
+    "retakenCode": ""
   },
 
   {
@@ -238,65 +238,65 @@
     "code": "COSE111",
     "semester": "2",
     "name": "수업4-1",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "4.0",
-    "삭제구분": "",
-    "재수강코드": "COSE112"
+    "division": "교양",
+    "credits": "3",
+    "gpa": "4.0",
+    "deleted": "",
+    "retakenCode": "COSE112"
   },
   {
     "year": "2016",
     "code": "COSE111",
     "semester": "2",
     "name": "수업4-2",
-    "이수구분": "교양",
-    "학점": "3",
-    "평점": "2.5",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "교양",
+    "credits": "3",
+    "gpa": "2.5",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2016",
     "code": "COSE111",
     "semester": "2",
     "name": "수업4-3",
-    "이수구분": "전공선택",
-    "학점": "3",
-    "평점": "4.0",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "전공선택",
+    "credits": "3",
+    "gpa": "4.0",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2016",
     "code": "COSE111",
     "semester": "2",
     "name": "수업4-4",
-    "이수구분": "전공필수",
-    "학점": "3",
-    "평점": "3.5",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "전공필수",
+    "credits": "3",
+    "gpa": "3.5",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2016",
     "code": "COSE111",
     "semester": "2",
     "name": "수업4-5",
-    "이수구분": "전공필수",
-    "학점": "3",
-    "평점": "3",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "전공필수",
+    "credits": "3",
+    "gpa": "3",
+    "deleted": "",
+    "retakenCode": ""
   },
   {
     "year": "2016",
     "code": "COSE111",
     "semester": "2",
     "name": "수업4-6",
-    "이수구분": "전공필수",
-    "학점": "3",
-    "평점": "4.0",
-    "삭제구분": "",
-    "재수강코드": ""
+    "division": "전공필수",
+    "credits": "3",
+    "gpa": "4.0",
+    "deleted": "",
+    "retakenCode": ""
   }
 ]
