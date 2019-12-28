@@ -47,18 +47,21 @@ const allReducer = (accumulator, current, index, array) => {
       accumulator[accIdx].majorGpa +=
         Number(current.credits) * Number(current.gpa);
       accumulator[accIdx].majorCredits += Number(current.credits);
+      if (current.grade === "P" || current.grade === "F") {
+        accumulator[accIdx].pfMajorCredits += Number(current.credits);
+      }
     } else {
       accumulator[accIdx].generalGpa +=
         Number(current.credits) * Number(current.gpa);
       accumulator[accIdx].generalCredits += Number(current.credits);
+      if (current.grade === "P" || current.grade === "F") {
+        accumulator[accIdx].pfGeneralCredits += Number(current.credits);
+      }
     }
     accumulator[accIdx].totalGpa +=
       Number(current.gpa) * Number(current.credits);
     accumulator[accIdx].totalCredits += Number(current.credits);
-    if (current.grade === "P" || current.grade === "F") {
-      //PF일 경우
-      accumulator[accIdx].pfLectures += 1;
-    }
+    //PF일 경우
   } else {
     const newDatum = {
       yearterm: String(current.yearterm),
@@ -68,7 +71,14 @@ const allReducer = (accumulator, current, index, array) => {
       generalCredits: majorFlag ? 0 : Number(current.credits),
       majorGpa: majorFlag ? Number(current.gpa) * Number(current.credits) : 0,
       majorCredits: majorFlag ? Number(current.credits) : 0,
-      pfLectures: current.grade === "P" || current.grade === "F" ? 1 : 0
+      pfMajorCredits:
+        (majorFlag && current.grade === "P") || current.grade === "F"
+          ? Number(current.credits)
+          : 0,
+      pfGeneralCredits:
+        (!majorFlag && current.grade === "P") || current.grade === "F"
+          ? Number(current.credits)
+          : 0
     };
     accumulator.push(newDatum);
   }
@@ -85,35 +95,49 @@ const sumReducer = (accumulator, current, index, array) => {
       generalCredits: majorFlag ? 0 : Number(current.credits),
       majorGpa: majorFlag ? Number(current.gpa) * Number(current.credits) : 0,
       majorCredits: majorFlag ? Number(current.credits) : 0,
-      pfLectures: current.grade === "P" || current.grade === "F" ? 1 : 0
+      pfMajorCredits:
+        (majorFlag && current.grade === "P") || current.grade === "F"
+          ? Number(current.credits)
+          : 0,
+      pfGeneralCredits:
+        (!majorFlag && current.grade === "P") || current.grade === "F"
+          ? Number(current.credits)
+          : 0
     };
     accumulator.push(newDatum);
   } else {
-    if (current.grade === "P" || current.grade === "F")
-      //PF일 경우
-      accumulator[0].pfLectures += 1;
     accumulator[0].totalGpa += Number(current.gpa) * Number(current.credits);
     accumulator[0].totalCredits += Number(current.credits);
     if (majorFlag) {
       accumulator[0].majorGpa += Number(current.gpa) * Number(current.credits);
       accumulator[0].majorCredits += Number(current.credits);
+      if (current.grade === "P" || current.grade === "F") {
+        accumulator[0].pfMajorCredits += Number(current.credits);
+      }
     } else {
       accumulator[0].generalGpa +=
         Number(current.gpa) * Number(current.credits);
       accumulator[0].generalCredits += Number(current.credits);
+      if (current.grade === "P" || current.grade === "F") {
+        accumulator[0].pfGeneralCredits += Number(current.credits);
+      }
     }
   }
   if (index === array.length - 1) {
     const res = {
       avgTotalGpa: (
         accumulator[0].totalGpa /
-        (accumulator[0].totalCredits - accumulator[0].pfLectures)
+        (accumulator[0].totalCredits -
+          accumulator[0].pfMajorCredits -
+          accumulator[0].pfGeneralCredits)
       ).toFixed(2),
       avgMajorGpa: (
-        accumulator[0].majorGpa / accumulator[0].majorCredits
+        accumulator[0].majorGpa /
+        (accumulator[0].majorCredits - accumulator[0].pfMajorCredits)
       ).toFixed(2),
       avgGeneralGpa: (
-        accumulator[0].generalGpa / accumulator[0].generalCredits
+        accumulator[0].generalGpa /
+        (accumulator[0].generalCredits - accumulator[0].pfGeneralCredits)
       ).toFixed(2)
     };
     return res;
@@ -128,14 +152,23 @@ export const processingAll = data => {
   res.map(datum => {
     datum.totalGpa = !datum.totalGpa
       ? 0
-      : (datum.totalGpa / (datum.totalCredits - datum.pfLectures)).toFixed(2);
+      : (
+          datum.totalGpa /
+          (datum.totalCredits - datum.pfGeneralCredits - datum.pfMajorCredits)
+        ).toFixed(2);
     datum.majorGpa = !datum.majorGpa
       ? 0
-      : (datum.majorGpa / datum.majorCredits).toFixed(2);
+      : (datum.majorGpa / (datum.majorCredits - datum.pfMajorCredits)).toFixed(
+          2
+        );
     datum.generalGpa = !datum.generalGpa
       ? 0
-      : (datum.generalGpa / datum.generalCredits).toFixed(2);
-    delete datum.pfLectures;
+      : (
+          datum.generalGpa /
+          (datum.generalCredits - datum.pfGeneralCredits)
+        ).toFixed(2);
+    delete datum.pfGeneralCredits;
+    delete datum.pfMajorCredits;
   });
   console.log("--processed Data--");
   console.log(JSON.stringify(res));
