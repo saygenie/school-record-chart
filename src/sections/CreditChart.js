@@ -9,17 +9,17 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-import { processing4 } from "../parsing";
+import { processingAll } from "../parsing";
 
 // 이수 학점 차트
 function CreditChart({ data }) {
-  console.log(processing4(data),'processing4(data)')
+  console.log(processingAll(data), "processingAll(data)");
   return (
     <section>
       <BarChart
         width={700}
         height={300}
-        data={processing4(data)}
+        data={processingAll(data)}
         margin={{
           top: 20,
           right: 30,

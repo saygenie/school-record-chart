@@ -16,8 +16,8 @@ function GpaChart({ data }) {
   return (
     <section>
       <h1>학점</h1>
-      <div class="control">
-        <label class="radio">
+      <div className="control">
+        <label className="radio">
           <input
             type="radio"
             name="major"
@@ -29,7 +29,7 @@ function GpaChart({ data }) {
           />
           전공
         </label>
-        <label class="radio">
+        <label className="radio">
           <input
             type="radio"
             name="general"
