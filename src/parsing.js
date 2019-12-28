@@ -154,8 +154,7 @@ export const summarizingAll = data => {
   return res;
 };
 export const parsing = () => {
-  const w = document.getElementById("editableDiv");
-  const tb = w.getElementsByTagName("tbody")[1];
+  const tb = document.getElementsByTagName("tbody")[0];
   const length = tb.rows.length;
   const res = analyze(tb, length);
   console.log("--parsed Data--");

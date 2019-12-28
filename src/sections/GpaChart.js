@@ -8,6 +8,7 @@ import {
   Legend,
   Line
 } from "recharts";
+import { processingAll } from "../parsing";
 
 // 학점 차트
 function GpaChart({ data }) {
@@ -15,36 +16,11 @@ function GpaChart({ data }) {
 
   return (
     <section>
-      <h1>학점</h1>
-      <div className="control">
-        <label className="radio">
-          <input
-            type="radio"
-            name="major"
-            defaultChecked
-            onClick={() => {
-              document.getElementsByName("general")[0].checked = false;
-              setSelected("major");
-            }}
-          />
-          전공
-        </label>
-        <label className="radio">
-          <input
-            type="radio"
-            name="general"
-            onClick={() => {
-              document.getElementsByName("major")[0].checked = false;
-              setSelected("general");
-            }}
-          />
-          교양
-        </label>
-      </div>
+      <h5 class="subtitle is-5">학기별 평균 학점</h5>
       <LineChart
-        width={500}
-        height={250}
-        data={data}
+        width={600}
+        height={300}
+        data={processingAll(data)}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -52,7 +28,9 @@ function GpaChart({ data }) {
         <YAxis domain={[0, 4.5]} />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="averageGPA" stroke="#8884d8" />
+        <Line type="monotone" dataKey="totalGpa" stroke="#8884d8" />
+        <Line type="monotone" dataKey="generalGpa" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="majorGpa" stroke="#38dd90" />
       </LineChart>
     </section>
   );

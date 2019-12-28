@@ -13,11 +13,11 @@ import { processingAll } from "../parsing";
 
 // 이수 학점 차트
 function CreditChart({ data }) {
-  console.log(processingAll(data), "processingAll(data)");
   return (
     <section>
+      <h5 class="subtitle is-5">학기별 이수 학점</h5>
       <BarChart
-        width={700}
+        width={600}
         height={300}
         data={processingAll(data)}
         margin={{
@@ -27,7 +27,6 @@ function CreditChart({ data }) {
           bottom: 5
         }}
       >
-        <h1>이수 학점</h1>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="yearterm" />
         <YAxis type="number" domain={[0, "4.5"]} />
