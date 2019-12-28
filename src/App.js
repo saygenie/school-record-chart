@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CreditChart from "./sections/CreditChart";
 import GpaChart from "./sections/GpaChart";
+import Result from "./sections/Result";
 import styled from "styled-components";
 import { parsing } from "./parsing";
 
@@ -61,14 +62,17 @@ function App() {
             setData(parsedData);
           }}
         >
-          차트 만들기
+          <span>📊 차트 만들기 📈</span>
         </button>
       </RecordInput>
       {data.length !== 0 && (
-        <ChartWrapper>
-          <GpaChart data={data} />
-          <CreditChart data={data} />
-        </ChartWrapper>
+        <>
+          <ChartWrapper>
+            <GpaChart data={data} />
+            <CreditChart data={data} />
+          </ChartWrapper>
+          <Result data={data} />
+        </>
       )}
     </div>
   );
