@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   LineChart,
   CartesianGrid,
@@ -6,14 +6,13 @@ import {
   YAxis,
   Tooltip,
   Legend,
-  Line
+  Line,
+  ReferenceLine
 } from "recharts";
 import { processingAll } from "../parsing";
 
 // 학점 차트
 function GpaChart({ data }) {
-  const [selected, setSelected] = useState("major"); // 교양은 general
-
   return (
     <section>
       <h5 class="subtitle is-5">학기별 평균 학점</h5>
@@ -26,6 +25,7 @@ function GpaChart({ data }) {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="yearterm" />
         <YAxis domain={[0, 4.5]} />
+        <ReferenceLine y={3.24} stroke="red" />
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="totalGpa" stroke="#8884d8" />
