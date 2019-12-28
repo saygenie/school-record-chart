@@ -4,6 +4,7 @@ import GpaChart from "./sections/GpaChart";
 import Result from "./sections/Result";
 import styled from "styled-components";
 import { parsing } from "./parsing";
+import logo from "./yourgpa.png";
 
 const RecordInput = styled.div`
   padding: 3rem;
@@ -18,6 +19,18 @@ const RecordInput = styled.div`
   }
   button {
     margin-top: 3rem;
+  }
+`;
+
+const Logo = styled.div`
+  padding: 3rem;
+  div {
+    margin: 0 auto;
+    text-align: center;
+  }
+  img {
+    width: 50%;
+    text-align: center;
   }
 `;
 
@@ -52,6 +65,11 @@ function App() {
 
   return (
     <div className="App">
+      <Logo>
+        <div id="logo">
+          <img src={logo} alt="키미노쥐피에이와" />
+        </div>
+      </Logo>
       <RecordInput>
         <div id="editableDiv" contentEditable="true" onPaste={pasteHandler} />
         <button
