@@ -28,7 +28,7 @@ function CreditChart({ data }) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="yearterm" />
+        <XAxis dataKey="yearterm" padding={{ left: 30, right: 30 }} />
         <YAxis type="number" domain={[0, "4.5"]} />
         <Tooltip />
         <Legend />
