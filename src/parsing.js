@@ -155,6 +155,7 @@ export const summarizingAll = data => {
 };
 export const parsing = () => {
   const tb = document.getElementsByTagName("tbody")[0];
+
   const length = tb.rows.length;
   const res = analyze(tb, length);
   console.log("--parsed Data--");
