@@ -21,8 +21,15 @@ const RecordInput = styled.div`
 `;
 
 const ChartWrapper = styled.div`
+  display: flexbox;
   section {
+    .subtitle {
+      text-align: center;
+    }
     width: 50%;
+    div {
+      margin: 0 auto;
+    }
   }
 `;
 
